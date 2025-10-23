@@ -1,14 +1,16 @@
 # import models.clients as clients
-from models import (Client, 
-                    PostalAddress, 
-                    Email, 
-                    Invoice, 
-                    InvoiceItem)
-
-
+from models import (Client,
+                    Email,
+                    Invoice,
+                    InvoiceItem,
+                    PostalAddress)
+from infrasturctures import EmailsRepo
 
 
 def main():
+    email_repo = EmailsRepo()
+
+
     postal_address = PostalAddress("Ulica Primjera", "10A", "10000", "Zagreb", "Hrvatska")
     email_address = Email("pero@email.com", "Work")
     pero_peric = Client("Pero", "Peric", postal_address, email_address, "+38591234567")
@@ -53,6 +55,15 @@ def main():
     print("\n" + "="*40 + "\n")
     print()
     pero_peric.invoices[0].print_invoice()
+
+
+
+
+    email_repo.save_email(email_address)
+    new_email = Email("iva@email.com", "Private")
+    email_repo.save_email(new_email)
+
+
 
 
 if __name__ == "__main__":
